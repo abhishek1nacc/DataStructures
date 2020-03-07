@@ -36,7 +36,7 @@ public class MergeSort {
 	}
 
 	public static void main(String[] args) {
-		int arr[] = {1,2,34,9,11,43,98,0,111,45,90,677,-1,-8,-9};
+		int arr[] = {1,2,34,9,11,43,98,0,111,45,90,677,-1,-8,-9,400};
 		int tempArr[] = new int[arr.length];
 		MergeSort mergeSort = new MergeSort();
 		mergeSort.mergeSort(0, arr.length-1, arr, tempArr);
