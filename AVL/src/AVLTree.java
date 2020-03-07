@@ -110,6 +110,45 @@ public class AVLTree {
 		}
 		return root;
 	}
+	
+	void delete(int key) {
+		root = deleteRecur(key, root);
+	}
+
+	private Node deleteRecur(int key, Node root) {
+		if(root == null) {
+			return null;
+		}
+		
+		if(key < root.key) {
+			root.left = deleteRecur(key, root.left);
+		}else if(key > root.key) {
+			root.right = deleteRecur(key, root.right);
+		}else {
+			//Node to be deleted is root...
+			// If node to be deleted has 1 child or no child case...
+			if(root.left == null) {
+				return root.right;
+			}
+			if(root.right == null) {
+				return root.left;
+			}
+			//If node to be deleted has 2 child case..
+			//find the inorderSuccessor in right subtree..
+			int minValue = minVal(root.right);
+			root.key = minValue;
+			//Delete the minValue key in right subtree.
+			root.right = deleteRecur(key, root.right);
+		}
+		return root;
+	}
+
+	private int minVal(Node node) {
+		while(node.left != null) {
+			node = node.left;
+		}
+		return node.key;
+	}
 
 	void inOrder(Node root) {
 		if (root != null) {
@@ -131,6 +170,21 @@ public class AVLTree {
 		tree.insert(90);
 		tree.insert(-78);
 		tree.insert(787);
+		tree.inOrder(tree.root);
+		tree.delete(34);
+		System.out.println();
+		tree.inOrder(tree.root);
+		tree.delete(-78);
+		System.out.println();
+		tree.inOrder(tree.root);
+		tree.delete(787);
+		System.out.println();
+		tree.inOrder(tree.root);
+		tree.delete(90);
+		System.out.println();
+		tree.inOrder(tree.root);
+		tree.delete(9);
+		System.out.println();
 		tree.inOrder(tree.root);
 	}
 }
