@@ -140,6 +140,32 @@ public class AVLTree {
 			//Delete the minValue key in right subtree.
 			root.right = deleteRecur(key, root.right);
 		}
+		
+		//Update height of the current node
+		root.height = 1 + max(height(root.left), height(root.right));
+		
+		//Get balance factor of this node.
+		int balance = getBalance(root);
+		
+		//If this node get unbalanced, then there are 4 cases.
+		//Left Left case
+		if(balance > 1 && getBalance(root.left) >= 0) {
+			return rightRotate(root);
+		}
+		//Left Right case
+		if(balance > 1 && getBalance(root.left) < 0) {
+			root.left = leftRotate(root.left);
+			return rightRotate(root);
+		}
+		//Right Right case
+		if(balance < -1 && getBalance(root.right) <= 0) {
+			return leftRotate(root);
+		}
+		//Right Left case
+		if(balance < -1 && getBalance(root.right) > 0) {
+			root.right = rightRotate(root.right);
+			return leftRotate(root);
+		}
 		return root;
 	}
 
