@@ -50,6 +50,7 @@ public class LinkList {
 		}
 	}
 
+	// Test the different LinkList operations.
 	public static void main(String[] args) {
 		LinkList mLinkList = new LinkList();
 		mLinkList.addNode(new Node(10));
